@@ -1,0 +1,65 @@
+{
+  "name": "ms-phone",
+  "description": "",
+  "main": "./lib/index.js",
+  "scripts": {
+    "compile": "rm -rf ./lib; babel -d ./lib ./src",
+    "doc": "apidoc -i ./src/actions -v -o ./docs",
+    "docker-release": "./docker-release.sh",
+    "lint": "eslint .",
+    "prepublish": "npm run lint && npm run compile",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "start": "node ./bin/mservice.js | bunyan -o short",
+    "test": "npm run lint && ./test/docker.sh"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.1",
+    "common-errors": "^1.0.0",
+    "glob": "^7.0.5",
+    "is": "^3.1.0",
+    "lodash": "^4.14.1",
+    "ms-amqp-transport": "^4.0.0",
+    "ms-conf": "^2.1.0",
+    "ms-validation": "^3.0.0",
+    "mservice": "^3.3.1",
+    "twilio": "^2.9.2"
+  },
+  "devDependencies": {
+    "apidoc": "^0.16.1",
+    "apidoc-plugin-schema": "0.0.6",
+    "babel-cli": "^6.11.4",
+    "babel-eslint": "^6.1.2",
+    "babel-plugin-transform-es2015-destructuring": "^6.9.0",
+    "babel-plugin-transform-es2015-spread": "^6.6.5",
+    "babel-plugin-transform-object-rest-spread": "^6.6.5",
+    "babel-plugin-transform-runtime": "^6.12.0",
+    "babel-plugin-transform-strict-mode": "^6.11.3",
+    "babel-register": "^6.11.6",
+    "codecov": "^1.0.1",
+    "cz-conventional-changelog": "^1.1.6",
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb-base": "^5.0.1",
+    "eslint-plugin-import": "^1.12.0",
+    "eslint-plugin-mocha": "^4.3.0",
+    "isparta": "^4.0.0",
+    "istanbul": "^0.4.2",
+    "json": "^9.0.4",
+    "latest-version": "^2.0.0",
+    "mocha": "^3.0.0",
+    "semantic-release": "^4.3.5",
+    "sinon": "^1.17.5"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/makeomatic/ms-phone.git"
+  },
+  "release": {
+    "verifyConditions": []
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

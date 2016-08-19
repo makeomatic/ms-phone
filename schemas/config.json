@@ -1,0 +1,19 @@
+{
+  "id": "config",
+  "type": "object",
+  "properties": {
+    "phone": {
+      "type": "object",
+      "properties": {
+        "accounts": {
+          "type": "object",
+          "patternProperties": {
+            "^.+$": {
+              "$ref": "accounts"
+            }
+          }
+        }
+      }
+    }
+  }
+}
