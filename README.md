@@ -4,7 +4,7 @@
 [![Build Status](https://semaphoreci.com/api/v1/makeomatic/ms-phone/branches/master/shields_badge.svg)](https://semaphoreci.com/makeomatic/ms-phone)
 [![codecov](https://codecov.io/gh/makeomatic/ms-phone/branch/master/graph/badge.svg)](https://codecov.io/gh/makeomatic/ms-phone)
 
-Allows to interact with different communication providers through AMQP
+Allows to interact with different communication providers through AMQP.
 
 ## Providers
 
@@ -18,6 +18,8 @@ Allows to interact with different communication providers through AMQP
 * `type`: 'twilio',
 
 ## Usage
+
+API [documentation](https://makeomatic.github.io/ms-phone/).
 
 ```js
 const AMQP = require('ms-amqp-transport');
