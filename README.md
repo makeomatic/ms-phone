@@ -1,5 +1,9 @@
 # Phone Microservice
 
+[![npm version](https://badge.fury.io/js/ms-phone.svg)](https://badge.fury.io/js/ms-phone)
+[![Build Status](https://semaphoreci.com/api/v1/makeomatic/ms-phone/branches/master/shields_badge.svg)](https://semaphoreci.com/makeomatic/ms-phone)
+[![codecov](https://codecov.io/gh/makeomatic/ms-phone/branch/master/graph/badge.svg)](https://codecov.io/gh/makeomatic/ms-phone)
+
 Allows to interact with different communication providers through AMQP
 
 ## Providers
