@@ -5,7 +5,6 @@
   "main": "./lib/index.js",
   "scripts": {
     "compile": "rm -rf ./lib; babel -d ./lib ./src",
-    "doc": "apidoc -i ./src/actions -v -o ./docs",
     "docker-release": "mdep docker release",
     "lint": "eslint .",
     "prepublishOnly": "yarn compile",
