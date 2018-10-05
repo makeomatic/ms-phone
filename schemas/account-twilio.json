@@ -1,5 +1,5 @@
 {
-  "id": "account-twilio",
+  "$id": "account-twilio",
   "type": "object",
   "required": ["authToken", "from", "sid", "type"],
   "properties": {
@@ -17,7 +17,8 @@
       "default": {}
     },
     "type": {
-      "constant": "twilio"
+      "type": "string",
+      "const": "twilio"
     }
   }
 }

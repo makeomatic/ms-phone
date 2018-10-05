@@ -9,9 +9,9 @@ module.exports = {
   phone: {
     accounts: {
       test_account: {
-        authToken: '<AUTH_TOKEN>',
-        from: '+1 201-559-5555',
-        sid: 'ACa35f1e868cead4f1b3a31c6620000000',
+        authToken: process.env.TEST_AUTH_TOKEN,
+        from: process.env.TEST_PHONE_NUMBER,
+        sid: process.env.TEST_ACCOUNT_SID,
         type: 'twilio',
       },
     },

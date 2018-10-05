@@ -1,3 +1,5 @@
+const { ActionTransport } = require('@microfleet/core');
+
 /**
  * @api {amqp} <prefix>.message.predefined Send a message using predefined account
  * @apiVersion 1.0.0
@@ -13,6 +15,6 @@ function predefinedAction(request) {
 }
 
 predefinedAction.schema = 'message-predefined';
-predefinedAction.transports = ['amqp'];
+predefinedAction.transports = [ActionTransport.amqp];
 
 module.exports = predefinedAction;

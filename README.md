@@ -22,7 +22,7 @@ Allows to interact with different communication providers through AMQP.
 API [documentation](https://makeomatic.github.io/ms-phone/).
 
 ```js
-const AMQP = require('ms-amqp-transport');
+const AMQP = require('@microfleet/transport-amqp');
 const Phone = require('ms-mailer');
 
 const phone = new Phone({

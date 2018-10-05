@@ -1,3 +1,4 @@
+const { ActionTransport } = require('@microfleet/core');
 const transportFactory = require('../transports/factory');
 
 /**
@@ -15,6 +16,6 @@ function adhocAction(request) {
 }
 
 adhocAction.schema = 'message-adhoc';
-adhocAction.transports = ['amqp'];
+adhocAction.transports = [ActionTransport.amqp];
 
 module.exports = adhocAction;

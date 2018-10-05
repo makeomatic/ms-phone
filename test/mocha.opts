@@ -1,4 +1,5 @@
---require babel-register
---bail
+--require @babel/register
 --timeout 10000
+--bail
+--exit
 -R spec
