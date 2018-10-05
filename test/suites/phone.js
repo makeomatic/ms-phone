@@ -1,12 +1,9 @@
 const assert = require('assert');
-const sinon = require('sinon');
 const { inspectPromise } = require('@makeomatic/deploy');
 
 describe('Phone service', function serviceSuite() {
   const config = require('../configs/config');
   const PhoneService = require('../../src');
-  const sendMessageResponse = require('../fixtures/send-message-response');
-  const adapters = require('../../src/transports/adapters');
 
   const phoneService = new PhoneService(config);
 
@@ -33,32 +30,18 @@ describe('Phone service', function serviceSuite() {
 
       it('should be able to send message', async () => {
         const { amqp } = phoneService;
-        const { client } = phoneService.getAccount('test_account').transport;
+
         const message = {
           account: 'test_account',
           message: 'test message',
           to: '+79219234781',
         };
-        const args = {
-          body: 'test message',
-          from: '+1 201-559-5555',
-          to: '+79219234781',
-        };
 
-        const stub = sinon.stub(client, 'sendMessage');
-        stub.withArgs(args).resolves(sendMessageResponse);
+        const response = await amqp
+          .publishAndWait('phone.message.predefined', message);
 
-        try {
-          const response = await amqp
-            .publishAndWait('phone.message.predefined', message);
-
-          assert.deepStrictEqual(response, {
-            sid: 'SMc7f49c7a2b1f483d9f56c8f52863c1ca',
-            status: 'queued',
-          });
-        } finally {
-          stub.restore();
-        }
+        assert.ok(response.sid);
+        assert.equal(response.status, 'queued');
       });
     });
 
@@ -85,35 +68,23 @@ describe('Phone service', function serviceSuite() {
             + ' exactly one schema in oneOf');
       });
 
-      it('should be able to send message', async () => {
+      it('should be able to send message - sandbox', async () => {
         const { amqp } = phoneService;
         const message = {
           account: {
-            authToken: '<AUTH_TOKEN>',
-            from: '+1 201-559-5555',
-            sid: 'ACa35f1e868cead4f1b3a31c6620000000',
+            authToken: process.env.TEST_AUTH_TOKEN,
+            from: process.env.TEST_PHONE_NUMBER,
+            sid: process.env.TEST_ACCOUNT_SID,
             type: 'twilio',
           },
           message: 'test message',
           to: '+79219234781',
         };
-        const actionResponse = {
-          sid: 'SMc7f49c7a2b1f483d9f56c8f52863c1ca',
-          status: 'queued',
-        };
 
-        const stub = sinon.stub(adapters, 'twilio');
-        stub.withArgs(message.account).returns(async () => actionResponse);
+        const response = await amqp.publishAndWait('phone.message.adhoc', message);
 
-        try {
-          const response = await amqp.publishAndWait('phone.message.adhoc', message);
-          assert.deepStrictEqual(response, {
-            sid: 'SMc7f49c7a2b1f483d9f56c8f52863c1ca',
-            status: 'queued',
-          });
-        } finally {
-          stub.restore();
-        }
+        assert.ok(response.sid);
+        assert.equal(response.status, 'queued');
       });
     });
   });

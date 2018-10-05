@@ -15,4 +15,6 @@ services:
     environment:
       NODE_ENV: "test"
       DEBUG: ${DEBUG}
+    env_file:
+      - .env
     command: tail -f /dev/null

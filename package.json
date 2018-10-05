@@ -17,15 +17,17 @@
     "@microfleet/core": "^11.0.1",
     "@microfleet/transport-amqp": "^13.1.2",
     "bunyan": "^1.8.1",
+    "bunyan-noop": "^2.0.0",
+    "bunyan-sentry-stream": "^1.1.0",
     "common-errors": "^1.0.0",
     "glob": "^7.0.6",
     "is": "^3.1.0",
     "lodash.merge": "^4.6.1",
-    "lodash.pick": "^4.4.0",
     "ms-conf": "^3.3.0",
     "ms-validation": "^7.2.0",
+    "raven": "^2.6.4",
     "stdout-stream": "^1.4.1",
-    "twilio": "^2.9.2"
+    "twilio": "^3.22.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",
