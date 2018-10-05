@@ -1,5 +1,5 @@
 {
-  "id": "config",
+  "$id": "config",
   "type": "object",
   "properties": {
     "phone": {

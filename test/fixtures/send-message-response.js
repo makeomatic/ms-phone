@@ -17,11 +17,11 @@ module.exports = {
   price_unit: 'USD',
   error_code: null,
   error_message: null,
-  uri: '/2010-04-01/Accounts/ACa35f1e868cead4f1b3a31c6620000000/Messages/' +
-    'SMc7f49c7a2b1f483d9f56c8f52863c1ca.json',
+  uri: '/2010-04-01/Accounts/ACa35f1e868cead4f1b3a31c6620000000/Messages/'
+    + 'SMc7f49c7a2b1f483d9f56c8f52863c1ca.json',
   subresource_uris: {
-    media: '/2010-04-01/Accounts/ACa35f1e868cead4f1b3a31c6620000000/Messages/' +
-      'SMc7f49c7a2b1f483d9f56c8f52863c1ca/Media.json',
+    media: '/2010-04-01/Accounts/ACa35f1e868cead4f1b3a31c6620000000/Messages/'
+      + 'SMc7f49c7a2b1f483d9f56c8f52863c1ca/Media.json',
   },
   dateCreated: '2016-08-18T16:17:42.000Z',
   dateUpdated: '2016-08-18T16:17:42.000Z',
@@ -35,7 +35,7 @@ module.exports = {
   errorCode: null,
   errorMessage: null,
   subresourceUris: {
-    media: '/2010-04-01/Accounts/ACa35f1e868cead4f1b3a31c6620000000/Messages/' +
-      'SMc7f49c7a2b1f483d9f56c8f52863c1ca/Media.json',
+    media: '/2010-04-01/Accounts/ACa35f1e868cead4f1b3a31c6620000000/Messages/'
+      + 'SMc7f49c7a2b1f483d9f56c8f52863c1ca/Media.json',
   },
 };

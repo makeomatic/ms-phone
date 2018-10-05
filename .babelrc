@@ -1,12 +1,11 @@
 {
   "plugins": [
-    "transform-strict-mode",
-    "transform-es2015-spread",
-    "transform-object-rest-spread",
-    "transform-es2015-destructuring",
-    ["transform-runtime", {
-      "polyfill": false,
-      "regenerator": true
-    }],
-  ]
+    "@babel/plugin-transform-strict-mode",
+    "@babel/plugin-proposal-class-properties"
+  ],
+  "env": {
+    "test": {
+      "plugins": [ "istanbul" ]
+    }
+  }
 }

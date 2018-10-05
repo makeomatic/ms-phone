@@ -1,16 +1,15 @@
-const _ = require('lodash');
-const { globFiles } = require('ms-conf/lib/load-config');
+const merge = require('lodash.merge');
 const Errors = require('common-errors');
 const is = require('is');
-const MService = require('mservice');
-const path = require('path');
+const Microfleet = require('@microfleet/core');
+const conf = require('./config');
 const transportFactory = require('./transports/factory');
 
-const defaultConfig = globFiles(path.resolve(__dirname, 'configs'));
+class Phone extends Microfleet {
+  static defaultConfig = conf.get('/', { env: process.env.NODE_ENV });
 
-class Phone extends MService {
   constructor(config = {}) {
-    super(_.merge({}, defaultConfig, config));
+    super(merge({}, Phone.defaultConfig, config));
     this.initAccounts();
   }
 

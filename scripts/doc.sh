@@ -2,12 +2,8 @@
 
 set -e
 
-BUILD_ENV=${ENVS:-production}
-
-make ENVS="$BUILD_ENV" build push
-
-if [ x"$BRANCH_NAME" == x"master" ] && [ x"$SEMAPHORE" == x"true" ]; then
-  npm run doc
+if [ x"$SEMAPHORE" == x"true" ]; then
+  yarn doc
   git config user.email "semaphore@makeomatic.co"
   git config user.name "semaphore"
   git add -f ./docs

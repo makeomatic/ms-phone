@@ -1,5 +1,5 @@
 {
-  "id": "message-predefined",
+  "$id": "message-predefined",
   "type": "object",
   "additionalProperties": false,
   "required": [ "account", "message", "to" ],

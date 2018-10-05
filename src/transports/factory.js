@@ -2,7 +2,7 @@ const Errors = require('common-errors');
 const is = require('is');
 const adapters = require('./adapters');
 
-module.exports = accountConfig => {
+module.exports = (accountConfig) => {
   const adapter = adapters[accountConfig.type];
 
   if (is.undefined(adapter) === true) {

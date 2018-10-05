@@ -1,8 +1,6 @@
 {
-  "id": "accounts",
-  "oneOf": [
-    {
-      "$ref": "account-twilio"
-    }
-  ]
+  "$id": "accounts",
+  "oneOf": [{
+    "$ref": "account-twilio"
+  }]
 }

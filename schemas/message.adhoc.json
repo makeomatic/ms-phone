@@ -1,5 +1,5 @@
 {
-  "id": "message-adhoc",
+  "$id": "message-adhoc",
   "type": "object",
   "additionalProperties": false,
   "required": [ "account", "message", "to" ],
