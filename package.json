@@ -13,6 +13,11 @@
     "start": "mfleet",
     "test": "yarn lint && mdep test run"
   },
+  "files": [
+    "src/",
+    "lib/",
+    "schemas/"
+  ],
   "dependencies": {
     "@microfleet/core": "^11.0.1",
     "@microfleet/transport-amqp": "^13.1.2",
