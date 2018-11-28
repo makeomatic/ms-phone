@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/makeomatic/ms-phone/compare/v2.0.2...v2.1.0) (2018-11-28)
+
+
+### Features
+
+* upgrade deps, enable health-checks ([80394d5](https://github.com/makeomatic/ms-phone/commit/80394d5))
+
 ## [2.0.2](https://github.com/makeomatic/ms-phone/compare/v2.0.1...v2.0.2) (2018-10-05)
 
 
