@@ -1,7 +1,7 @@
 const merge = require('lodash.merge');
 const Errors = require('common-errors');
 const is = require('is');
-const Microfleet = require('@microfleet/core');
+const { Microfleet } = require('@microfleet/core');
 const conf = require('./config');
 const transportFactory = require('./transports/factory');
 
@@ -24,7 +24,7 @@ class Phone extends Microfleet {
       };
 
       return previous;
-    }, {});
+    }, Object.create(null));
   }
 
   getAccount(name) {

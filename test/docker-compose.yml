@@ -6,7 +6,7 @@ services:
     hostname: rabbitmq
 
   tester:
-    image: makeomatic/node:10.11.0-tester
+    image: makeomatic/node:10.13.0-tester
     links:
       - rabbitmq
     working_dir: /src
