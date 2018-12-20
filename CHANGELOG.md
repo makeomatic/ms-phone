@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/makeomatic/ms-phone/compare/v2.1.0...v2.1.1) (2018-12-20)
+
+
+### Bug Fixes
+
+* upgrade deps ([a28a495](https://github.com/makeomatic/ms-phone/commit/a28a495))
+
 # [2.1.0](https://github.com/makeomatic/ms-phone/compare/v2.0.2...v2.1.0) (2018-11-28)
 
 
