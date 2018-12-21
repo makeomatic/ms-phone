@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/makeomatic/ms-phone/compare/v2.1.1...v2.1.2) (2018-12-21)
+
+
+### Bug Fixes
+
+* sentry logger ([cb9446f](https://github.com/makeomatic/ms-phone/commit/cb9446f))
+
 ## [2.1.1](https://github.com/makeomatic/ms-phone/compare/v2.1.0...v2.1.1) (2018-12-20)
 
 
