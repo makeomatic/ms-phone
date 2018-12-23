@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/makeomatic/ms-phone/compare/v2.1.2...v2.1.3) (2018-12-23)
+
+
+### Bug Fixes
+
+* improved logging ([31a781d](https://github.com/makeomatic/ms-phone/commit/31a781d))
+
 ## [2.1.2](https://github.com/makeomatic/ms-phone/compare/v2.1.1...v2.1.2) (2018-12-21)
 
 
