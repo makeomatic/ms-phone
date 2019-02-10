@@ -6,4 +6,5 @@ exports.plugins = [
   'router',
   'http',
   'amqp',
+  'prometheus',
 ];
