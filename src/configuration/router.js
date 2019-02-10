@@ -15,7 +15,7 @@ exports.router = {
     enabled: ['postRequest', 'preRequest', 'preResponse'],
     register: [
       routerExtension('validate/schemaLessAction'),
-      routerExtension('audit/log'),
+      routerExtension('audit/log')(),
     ],
   },
 };
