@@ -1,3 +1,10 @@
+# [2.2.0](https://github.com/makeomatic/ms-phone/compare/v2.1.3...v2.2.0) (2019-02-10)
+
+
+### Features
+
+* prometheus ([#5](https://github.com/makeomatic/ms-phone/issues/5)) ([7746179](https://github.com/makeomatic/ms-phone/commit/7746179))
+
 ## [2.1.3](https://github.com/makeomatic/ms-phone/compare/v2.1.2...v2.1.3) (2018-12-23)
 
 
