@@ -1,6 +1,0 @@
-{
-  "$id": "accounts",
-  "oneOf": [{
-    "$ref": "account-twilio"
-  }]
-}
