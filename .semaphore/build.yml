@@ -10,6 +10,7 @@ blocks:
     task:
       secrets:
         - name: semantic-release
+        - name: docker-hub
       prologue:
         commands:
           - checkout
