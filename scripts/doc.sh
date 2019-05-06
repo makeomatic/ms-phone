@@ -2,12 +2,13 @@
 
 set -ex
 
+
 # prepare docs
 current_branch=`git rev-parse --abbrev-ref HEAD`
 branch_name="docs"
 git checkout -b $branch_name
 cd ./schemas
-apidoc -i ../src/actions -v --debug -o ../docs
+../node_modules/.bin/apidoc -i ../src/actions -v --debug -o ../docs
 cd ..
 git config user.email "semaphore@makeomatic.co"
 git config user.name "semaphore"
