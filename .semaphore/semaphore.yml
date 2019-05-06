@@ -1,56 +1,42 @@
 version: v1.0
-name: First pipeline example
+name: ms-phone
 agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-  - name: "Build"
+
+  - name: Install dependencies
     task:
-      env_vars:
-        - name: APP_ENV
-          value: prod
-      jobs:
-      - name: Docker build
+      prologue:
         commands:
           - checkout
-          - ls -1
-          - echo $APP_ENV
-          - echo "Docker build..."
-          - echo "done"
-  - name: "Smoke tests"
+          - cache restore node-modules-$(checksum yarn.lock)
+      jobs:
+      - name: yarn install
+        commands:
+        - yarn install --frozen-lockfile
+        - cache store node-modules-$(checksum yarn.lock) node_modules
+
+  - name: Run tests
     task:
+      secrets:
+        - name: ms-phone
+      prologue:
+        commands:
+          - cache store env-$SEMAPHORE_JOB_ID test/.env
+          - checkout
+          - cache restore env-$SEMAPHORE_JOB_ID
+          - cache restore node-modules-$(checksum yarn.lock)
       jobs:
-      - name: Smoke
+      - name: yarn test
         commands:
-          - checkout
-          - echo "make smoke"
-  - name: "Unit tests"
-    task:
-      jobs:
-      - name: RSpec
-        commands:
-          - checkout
-          - echo "make rspec"
-      - name: Lint code
-        commands:
-          - checkout
-          - echo "make lint"
-      - name: Check security
-        commands:
-          - checkout
-          - echo "make security"
-  - name: "Integration tests"
-    task:
-      jobs:
-      - name: Cucumber
-        commands:
-          - checkout
-          - echo "make cucumber"
-  - name: "Push Image"
-    task:
-      jobs:
-      - name: Push
-        commands:
-          - checkout
-          - echo "make docker.push"
+          - yarn test
+
+promotions:
+  - name: Publish image
+    pipeline_file: build.yml
+    auto_promote_on:
+      - result: passed
+        branch:
+          - ^master$
