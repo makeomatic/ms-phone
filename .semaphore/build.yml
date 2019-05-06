@@ -6,7 +6,9 @@ agent:
     os_image: ubuntu1804
 blocks:
 
-  - name: Publish image
+  - name: semantic-release
+    secrets:
+      - name: semantic-release
     task:
       prologue:
         commands:
