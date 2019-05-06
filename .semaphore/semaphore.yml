@@ -11,6 +11,7 @@ blocks:
     task:
       prologue:
         commands:
+          - sem-version node 10.15.3
           - checkout
           - cache restore node-modules-$(checksum yarn.lock)
       jobs:
@@ -25,6 +26,7 @@ blocks:
         - name: ms-phone
       prologue:
         commands:
+          - sem-version node 10.15.3
           - cache store env-$SEMAPHORE_JOB_ID test/.env
           - checkout
           - cache restore env-$SEMAPHORE_JOB_ID

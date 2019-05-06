@@ -13,6 +13,7 @@ blocks:
         - name: docker-hub
       prologue:
         commands:
+          - sem-version node 10.15.3
           - checkout
           - cache restore node-modules-$(checksum yarn.lock)
           - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
