@@ -7,9 +7,9 @@ agent:
 blocks:
 
   - name: semantic-release
-    secrets:
-      - name: semantic-release
     task:
+      secrets:
+        - name: semantic-release
       prologue:
         commands:
           - checkout
