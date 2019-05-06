@@ -13,7 +13,6 @@ blocks:
         commands:
           - sem-version node 10.15.3
           - checkout
-          - cache restore node-modules-$(checksum yarn.lock)
       jobs:
       - name: yarn install
         commands:
