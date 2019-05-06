@@ -15,6 +15,7 @@ blocks:
         commands:
           - checkout
           - cache restore node-modules-$(checksum yarn.lock)
+          - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
       jobs:
       - name: yarn semantic-release
         commands:
