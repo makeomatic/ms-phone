@@ -1,0 +1,42 @@
+version: v1.0
+name: ms-phone
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+
+  - name: Install dependencies
+    task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore node-modules-$(checksum yarn.lock)
+      jobs:
+      - name: yarn install
+        commands:
+        - yarn install --frozen-lockfile
+        - cache store node-modules-$(checksum yarn.lock) node_modules
+
+  - name: Run tests
+    task:
+      secrets:
+        - name: ms-phone
+      prologue:
+        commands:
+          - cache store env-$SEMAPHORE_JOB_ID test/.env
+          - checkout
+          - cache restore env-$SEMAPHORE_JOB_ID
+          - cache restore node-modules-$(checksum yarn.lock)
+      jobs:
+      - name: yarn test
+        commands:
+          - yarn test
+
+promotions:
+  - name: Publish image
+    pipeline_file: build.yml
+    auto_promote_on:
+      - result: passed
+        branch:
+          - ^master$

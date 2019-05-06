@@ -1,0 +1,18 @@
+version: v1.0
+name: Image builder
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+
+  - name: Publish image
+    task:
+      prologue:
+        commands:
+          - checkout
+          - cache restore node-modules-$(checksum yarn.lock)
+      jobs:
+      - name: yarn semantic-release
+        commands:
+        - yarn semantic-release
