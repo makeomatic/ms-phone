@@ -5,22 +5,22 @@ agent:
     type: e1-standard-2
     os_image: ubuntu1804
 blocks:
-
   - name: semantic-release
     task:
       secrets:
         - name: semantic-release
         - name: docker-hub
+        - name: ms-phone
       prologue:
         commands:
           - sudo chmod -R 0777 /etc/docker
-          - echo '{"experimental":true}' > /etc/docker/daemon.json
+          - 'echo ''{"experimental":true}'' > /etc/docker/daemon.json'
           - sudo service docker restart
           - sem-version node 10.15.3
           - checkout
           - cache restore node-modules-$(checksum yarn.lock)
           - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
       jobs:
-      - name: yarn semantic-release
-        commands:
-        - yarn semantic-release
+        - name: yarn semantic-release
+          commands:
+            - yarn semantic-release
