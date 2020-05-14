@@ -6,6 +6,7 @@
   "scripts": {
     "compile": "rm -rf ./lib; babel -d ./lib ./src",
     "docker-release": "mdep docker release",
+    "publish-image": "mdep docker tag",
     "lint": "eslint .",
     "prepublishOnly": "yarn compile",
     "semantic-release": "semantic-release",
