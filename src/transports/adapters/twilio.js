@@ -10,7 +10,7 @@ module.exports = (accountConfig) => {
       .account
       .messages
       .create({ from, to, body })
-      .then(response => ({
+      .then((response) => ({
         sid: response.sid,
         status: response.status,
       }))

@@ -9,14 +9,18 @@ blocks:
     task:
       prologue:
         commands:
-          - sem-version node 10.15.3
+          - sem-version node 12.16.3
           - checkout
           - cache restore node-modules-$(checksum yarn.lock)
+          - cp ../test/.env test/.env
       jobs:
         - name: yarn install
           commands:
             - yarn install --frozen-lockfile
             - cache store node-modules-$(checksum yarn.lock) node_modules
+        - name: yarn test
+          commands:
+            - yarn test
       secrets:
         - name: ms-phone
         - name: docker-hub
@@ -24,9 +28,5 @@ blocks:
 promotions:
   - name: Publish image
     pipeline_file: build.yml
-    auto_promote_on:
-      - result: passed
-        branch:
-          - ^master$
     auto_promote:
-      when: branch = 'master' AND result = 'passed'
+      when: (branch = 'master' OR branch = 'staging') AND result = 'passed'

@@ -31,7 +31,7 @@ node_modules
 # User defined
 test
 Makefile
-.env
+test/.env
 
 # this is all that's still pretty useless
 .npmrc

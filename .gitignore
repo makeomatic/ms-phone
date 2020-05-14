@@ -31,7 +31,14 @@ node_modules
 
 # compiled source code
 lib
-.env
+test/.env
 
 # docs
 docs
+
+# .releaserc.json produced by mdep
+.releaserc.json
+
+# IDEs
+.idea
+

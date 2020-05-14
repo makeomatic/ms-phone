@@ -6,6 +6,7 @@
   "scripts": {
     "compile": "rm -rf ./lib; babel -d ./lib ./src",
     "docker-release": "mdep docker release",
+    "publish-image": "mdep docker tag",
     "lint": "eslint .",
     "prepublishOnly": "yarn compile",
     "semantic-release": "semantic-release",
@@ -18,15 +19,18 @@
     "schemas/"
   ],
   "dependencies": {
-    "@microfleet/core": "^13.3.2",
-    "@microfleet/transport-amqp": "^13.1.2",
-    "@microfleet/validation": "^8.1.0",
+    "@microfleet/core": "^17.3.0",
+    "@microfleet/transport-amqp": "^15.0.0",
+    "@microfleet/validation": "^9.0.0",
+    "@hapi/boom": "^9.1.0",
+    "@hapi/hapi": "^19.1.1",
+    "@hapi/vision": "^6.0.0",
+    "chalk": "^4.0.0",
     "bunyan": "^1.8.1",
     "bunyan-noop": "^2.0.0",
     "bunyan-sentry-stream": "^1.1.0",
     "common-errors": "^1.0.0",
     "glob": "^7.0.6",
-    "hapi": "^17.8.1",
     "is": "^3.1.0",
     "jaeger-client": "^3.13.0",
     "lodash.merge": "^4.6.1",
@@ -42,7 +46,7 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-transform-strict-mode": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@makeomatic/deploy": "^8.3.0",
+    "@makeomatic/deploy": "^10.0.0",
     "@semantic-release/changelog": "^3.0.1",
     "@semantic-release/exec": "^3.3.0",
     "@semantic-release/git": "^7.0.5",
@@ -61,8 +65,8 @@
     "sinon": "^7.1.1"
   },
   "engine": {
-    "node": ">= 8.9.0",
-    "npm": ">= 5.0.0"
+    "node": ">= 12.4.0",
+    "npm": ">= 6.0.0"
   },
   "license": "MIT",
   "repository": {
