@@ -12,7 +12,7 @@ blocks:
           - sem-version node 12.16.3
           - checkout
           - cache restore node-modules-$(checksum yarn.lock)
-          - cp ../.env test/.env
+          - cp ../test/.env test/.env
       jobs:
         - name: yarn install
           commands:
