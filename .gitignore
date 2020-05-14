@@ -36,5 +36,9 @@ test/.env
 # docs
 docs
 
+# .releaserc.json produced by mdep
+.releaserc.json
+
 # IDEs
 .idea
+

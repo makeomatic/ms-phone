@@ -46,7 +46,7 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/plugin-transform-strict-mode": "^7.0.0",
     "@babel/register": "^7.0.0",
-    "@makeomatic/deploy": "^8.3.0",
+    "@makeomatic/deploy": "^10.0.0",
     "@semantic-release/changelog": "^3.0.1",
     "@semantic-release/exec": "^3.3.0",
     "@semantic-release/git": "^7.0.5",

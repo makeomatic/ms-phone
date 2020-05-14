@@ -11,15 +11,11 @@ prepare:
   - "@semantic-release/npm"
   - path: "@semantic-release/exec"
     cmd: |-
-      yarn docker-release
+      yarn docker-release -T ${nextRelease.version}
   - "@semantic-release/git"
 
 publish:
   - "@semantic-release/npm"
-  - path: "@semantic-release/exec"
-    cmd: |-
-      yarn mdep docker tag --include_node=false -v ${nextRelease.version}
-      yarn mdep docker push --include_node=false -v ${nextRelease.version}
   - "@semantic-release/github"
 
 analyzeCommits:
