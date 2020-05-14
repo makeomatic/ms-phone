@@ -9,7 +9,7 @@ blocks:
     task:
       prologue:
         commands:
-          - sem-version node 10.15.3
+          - sem-version node 12.16.3
           - checkout
           - cache restore node-modules-$(checksum yarn.lock)
       jobs:
