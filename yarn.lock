@@ -734,9 +734,9 @@
     yargs "15.1.0"
 
 "@makeomatic/deploy@^10.0.0":
-  version "10.2.0"
-  resolved "https://registry.yarnpkg.com/@makeomatic/deploy/-/deploy-10.2.0.tgz#21a9ef4fd523caae61e7461d8fa05ba186fa3e32"
-  integrity sha512-1vCTFLaNf1qsL5Y0JRmrm9EDq3r/SG0Xq+jkHdFbyX7YeJvQCYGRbje+XevzyNMjs95FAlCRSfkAsUl2ZEbBKQ==
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/@makeomatic/deploy/-/deploy-10.2.1.tgz#f549e609d27294419c66a844054836b2c24e51e7"
+  integrity sha512-oFKDhLJJVXYY8jAdPYTxivUFC7JdAK3kzi0q2EMJEkV0Lb6o0SkgpgaAf6XdZathNFY6YG6LnntKgySwzkSYHw==
   dependencies:
     "@commitlint/cli" "^8.3.5"
     bluebird "^3.7.2"
