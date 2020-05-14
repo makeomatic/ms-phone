@@ -31,7 +31,10 @@ node_modules
 
 # compiled source code
 lib
-.env
+test/.env
 
 # docs
 docs
+
+# IDEs
+.idea
