@@ -31,7 +31,7 @@ node_modules
 
 # compiled source code
 lib
-test/.env
+.env
 
 # docs
 docs

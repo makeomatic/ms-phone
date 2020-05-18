@@ -30,4 +30,4 @@ src
 # test dir
 test
 Makefile
-test/.env
+.env

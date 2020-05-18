@@ -3,35 +3,28 @@ branches:
   - name: staging
     prerelease: rc
 
-verifyConditions:
+plugins:
+  - - "@semantic-release/commit-analyzer"
+    - preset: angular
+      releaseRules:
+        - type: docs
+          release: patch
+        - type: refactor
+          release: patch
+        - type: style
+          release: patch
+        - type: minor
+          release: minor
+        - type: patch
+          release: patch
+        - type: major
+          release: major
+        - type: breaking
+          release: major
+  - "@semantic-release/changelog"
   - "@semantic-release/npm"
-  - "@semantic-release/github"
-
-prepare:
-  - "@semantic-release/npm"
-  - path: "@semantic-release/exec"
-    cmd: |-
-      yarn docker-release -T ${nextRelease.version}
+  - - "@semantic-release/exec"
+    - prepareCmd: |-
+        yarn docker-release -T ${nextRelease.version}
   - "@semantic-release/git"
-
-publish:
-  - "@semantic-release/npm"
   - "@semantic-release/github"
-
-analyzeCommits:
-  preset: angular
-  releaseRules:
-    - type: docs
-      release: patch
-    - type: refactor
-      release: patch
-    - type: style
-      release: patch
-    - type: minor
-      release: minor
-    - type: patch
-      release: patch
-    - type: major
-      release: major
-    - type: breaking
-      release: major
