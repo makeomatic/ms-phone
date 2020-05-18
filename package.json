@@ -33,7 +33,7 @@
     "is": "^3.1.0",
     "jaeger-client": "^3.13.0",
     "lodash.merge": "^4.6.1",
-    "ms-conf": "^3.3.1",
+    "ms-conf": "^7.0.0",
     "prom-client": "^11.2.1",
     "raven": "^2.6.4",
     "stdout-stream": "^1.4.1",
