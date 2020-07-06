@@ -1,0 +1,30 @@
+branches:
+  - name: master
+  - name: staging
+    prerelease: rc
+
+plugins:
+  - - "@semantic-release/commit-analyzer"
+    - preset: angular
+      releaseRules:
+        - type: docs
+          release: patch
+        - type: refactor
+          release: patch
+        - type: style
+          release: patch
+        - type: minor
+          release: minor
+        - type: patch
+          release: patch
+        - type: major
+          release: major
+        - type: breaking
+          release: major
+  - "@semantic-release/changelog"
+  - "@semantic-release/npm"
+  - - "@semantic-release/exec"
+    - prepareCmd: |-
+        yarn docker-release -T ${nextRelease.version}
+  - "@semantic-release/git"
+  - "@semantic-release/github"

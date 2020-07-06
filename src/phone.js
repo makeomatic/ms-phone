@@ -36,6 +36,17 @@ class Phone extends Microfleet {
 
     return account;
   }
+
+  async getHealthStatus() {
+    try {
+      const status = await super.getHealthStatus();
+      this.log.info(status);
+      return status;
+    } catch (err) {
+      this.log.error(err);
+      throw err;
+    }
+  }
 }
 
 module.exports = Phone;
