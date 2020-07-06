@@ -13,11 +13,9 @@ blocks:
           - checkout
           - cache restore node-modules-$(checksum yarn.lock)
           - cp ../test/.env test/.env
+          - yarn install --frozen-lockfile
+          - cache store node-modules-$(checksum yarn.lock) node_modules
       jobs:
-        - name: yarn install
-          commands:
-            - yarn install --frozen-lockfile
-            - cache store node-modules-$(checksum yarn.lock) node_modules
         - name: yarn test
           commands:
             - yarn test
@@ -25,6 +23,7 @@ blocks:
         - name: ms-phone
         - name: docker-hub
         - name: semantic-release
+
 promotions:
   - name: Publish image
     pipeline_file: build.yml
