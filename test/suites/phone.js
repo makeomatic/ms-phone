@@ -88,4 +88,39 @@ describe('Phone service', function serviceSuite() {
       });
     });
   });
+
+  describe('with "messagebird" provider', function messagebirdSuite() {
+    it('should be able to send message on "message.predefined" action', async () => {
+      const { amqp } = phoneService;
+      const message = {
+        account: 'test_account_messagebird',
+        message: 'predefined test message',
+        to: '+79219234781',
+      };
+
+      const response = await amqp.publishAndWait('phone.message.predefined', message);
+
+      assert(response.id);
+      assert.equal(response.totalSentCount, 1);
+    });
+
+
+    it('should be able to send message on "message.adhoc" action', async () => {
+      const { amqp } = phoneService;
+      const message = {
+        account: {
+          apiKey: process.env.TEST_API_KEY_MESSAGE_BIRD,
+          from: process.env.TEST_PHONE_NUMBER,
+          type: 'messagebird',
+        },
+        message: 'adhoc test message',
+        to: '+79219234781',
+      };
+
+      const response = await amqp.publishAndWait('phone.message.adhoc', message);
+
+      assert(response.id);
+      assert.equal(response.totalSentCount, 1);
+    });
+  });
 });

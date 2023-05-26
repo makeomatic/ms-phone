@@ -14,7 +14,7 @@ module.exports = (accountConfig) => {
     client.messages.create(msgParams, (err, response) => {
       if (err) return reject(err);
 
-      return resolve({ id: response.id });
+      return resolve({ id: response.id, totalSentCount: response.recipients.totalSentCount });
     });
   });
 
