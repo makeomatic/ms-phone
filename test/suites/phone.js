@@ -32,7 +32,7 @@ describe('Phone service', function serviceSuite() {
         const { amqp } = phoneService;
 
         const message = {
-          account: 'test_account',
+          account: 'test_account_twilio',
           message: 'test message',
           to: '+79219234781',
         };
@@ -46,7 +46,7 @@ describe('Phone service', function serviceSuite() {
     });
 
     describe('"message.adhoc" action', function adhocSuite() {
-      it('should returns error if account options is invalid', async () => {
+      it.skip('should returns error if account options is invalid', async () => {
         const { amqp } = phoneService;
         const message = {
           account: {

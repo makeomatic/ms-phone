@@ -1,0 +1,17 @@
+{
+  "$id": "account-messagebird",
+  "type": "object",
+  "required": ["apiKey", "from", "type"],
+  "properties": {
+    "apiKey": {
+      "type": "string"
+    },
+    "from": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "const": "messagebird"
+    }
+  }
+}
