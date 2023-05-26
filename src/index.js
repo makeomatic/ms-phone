@@ -1,1 +1,1 @@
-module.exports = require('./phone.js');
+module.exports = require('./phone');

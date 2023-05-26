@@ -104,7 +104,6 @@ describe('Phone service', function serviceSuite() {
       assert.equal(response.totalSentCount, 1);
     });
 
-
     it('should be able to send message on "message.adhoc" action', async () => {
       const { amqp } = phoneService;
       const message = {
