@@ -1,4 +1,5 @@
 module.exports = {
+  name: 'phone',
   amqp: {
     transport: {
       connection: {
