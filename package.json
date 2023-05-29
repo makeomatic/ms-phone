@@ -28,6 +28,7 @@
     "@microfleet/plugin-logger": "^2.2.6",
     "@microfleet/plugin-prometheus": "^2.2.6",
     "@microfleet/plugin-router": "^2.2.6",
+    "@microfleet/plugin-router-amqp": "^2.2.6",
     "@microfleet/plugin-router-hapi": "^2.2.6",
     "@microfleet/plugin-validator": "^2.2.6",
     "@microfleet/transport-amqp": "^17.4.0",

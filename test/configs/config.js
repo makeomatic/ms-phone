@@ -1,12 +1,14 @@
 module.exports = {
+  logger: {
+    defaultLogger: true,
+    debug: true,
+  },
   name: 'phone',
   amqp: {
     transport: {
       connection: {
         host: 'rabbitmq',
-        port: 5672,
       },
-      debug: true,
     },
   },
   phone: {
