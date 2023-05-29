@@ -2,14 +2,12 @@ const merge = require('lodash.merge');
 const Errors = require('common-errors');
 const is = require('is');
 const { Microfleet } = require('@microfleet/core');
-const conf = require('./config');
+const getStore = require('./config');
 const transportFactory = require('./transports/factory');
 
 class Phone extends Microfleet {
-  static defaultConfig = conf.get('/', { env: process.env.NODE_ENV });
-
   constructor(config = {}) {
-    super(merge({}, Phone.defaultConfig, config));
+    super(config);
     this.initAccounts();
   }
 
@@ -48,5 +46,12 @@ class Phone extends Microfleet {
     }
   }
 }
+
+module.exports = async function initPhone(defaultOpts = {}) {
+  const store = await getStore({ env: process.env.NODE_ENV });
+  const config = store.get('/');
+
+  return new Phone(merge({}, config, defaultOpts));
+};
 
 module.exports = Phone;
