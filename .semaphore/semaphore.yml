@@ -4,30 +4,46 @@ agent:
   machine:
     type: e1-standard-2
     os_image: ubuntu2004
+
+fail_fast:
+  stop:
+    when: "branch != 'master'"
+
+auto_cancel:
+  running:
+    when: "branch != 'master'"
+
+global_job_config:
+  prologue:
+    commands:
+    - checkout
+    - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@8
+    - cache restore node-$(checksum pnpm-lock.yaml)
+    - pnpm config set store-dir ~/.pnpm-store
+    - cp ../test/.env test/.env
+    - pnpm i --frozen-lockfile --prefer-offline --ignore-scripts
+    - cache store node-$(checksum pnpm-lock.yaml) ~/.pnpm-store
+
 blocks:
-  - name: Install dependencies
+  - name: Install dependencies & test
+    dependencies: []
     task:
-      prologue:
-        commands:
-          - set -e
-          - sem-version node 16
-          - checkout
-          - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@8
-          - cache restore node-$(checksum pnpm-lock.yaml)
-          - cp ../test/.env test/.env
-          - pnpm i --frozen-lockfile --prefer-offline --ignore-scripts
-          - cache store node-$(checksum pnpm-lock.yaml) ~/.pnpm-store
       jobs:
-        - name: tests
-          commands:
-            - pnpm test
+      - name: tests
+        commands:
+          - pnpm test
+          - pnpm mdep docker build
       secrets:
         - name: ms-phone
-        - name: docker-hub
-        - name: semantic-release
-
-promotions:
-  - name: Publish image
-    pipeline_file: build.yml
-    auto_promote:
+  - name: Release
+    dependencies: ["Install dependencies & test"]
+    run:
       when: (branch = 'master' OR branch = 'staging') AND result = 'passed'
+    task:
+      secrets:
+      - name: docker-hub
+      - name: semantic-release
+      jobs:
+      - name: release
+        commands:
+          - pnpm run semantic-release
