@@ -38,7 +38,7 @@ blocks:
   - name: Release
     dependencies: ["Install dependencies & test"]
     skip:
-      when: branch != 'master' OR branch != 'staging'
+      when: branch != 'master' AND branch != 'staging'
     task:
       secrets:
       - name: docker-hub
