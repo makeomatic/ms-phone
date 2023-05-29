@@ -6,7 +6,6 @@
   "scripts": {
     "docker-release": "mdep docker release",
     "lint": "eslint ./src ./test",
-    "prepublishOnly": "npm run compile",
     "semantic-release": "semantic-release",
     "start": "mfleet",
     "test": "pnpm lint && mdep test run",
