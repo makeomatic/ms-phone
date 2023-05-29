@@ -25,6 +25,6 @@ plugins:
   - "@semantic-release/npm"
   - - "@semantic-release/exec"
     - prepareCmd: |-
-        yarn docker-release -T ${nextRelease.version}
+        pnpm docker-release -T ${nextRelease.version}
   - "@semantic-release/git"
   - "@semantic-release/github"
