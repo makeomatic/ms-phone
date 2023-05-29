@@ -32,6 +32,7 @@ node_modules
 test
 Makefile
 .env
+*.env
 
 # this is all that's still pretty useless
 .npmrc
