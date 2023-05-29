@@ -3,22 +3,24 @@ name: ms-phone
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2004
 blocks:
   - name: Install dependencies
     task:
       prologue:
         commands:
-          - sem-version node 12.16.3
+          - set -e
+          - sem-version node 16
           - checkout
-          - cache restore node-modules-$(checksum yarn.lock)
+          - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
+          - cache restore node-$(checksum pnpm-lock.yaml)
           - cp ../test/.env test/.env
-          - yarn install --frozen-lockfile
-          - cache store node-modules-$(checksum yarn.lock) node_modules
+          - pnpm i --frozen-lockfile --prefer-offline --ignore-scripts
+          - cache store node-$(checksum pnpm-lock.yaml) ~/.pnpm-store
       jobs:
-        - name: yarn test
+        - name: tests
           commands:
-            - yarn test
+            - pnpm test
       secrets:
         - name: ms-phone
         - name: docker-hub

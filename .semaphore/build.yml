@@ -3,7 +3,7 @@ name: Image builder
 agent:
   machine:
     type: e1-standard-2
-    os_image: ubuntu1804
+    os_image: ubuntu2004
 blocks:
   - name: semantic-release
     task:
@@ -16,11 +16,12 @@ blocks:
           - sudo chmod -R 0777 /etc/docker
           - 'echo ''{"experimental":true}'' > /etc/docker/daemon.json'
           - sudo service docker restart
-          - sem-version node 12.16.3
+          - sem-version node 16
+          - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
           - checkout
-          - cache restore node-modules-$(checksum yarn.lock)
+          - cache restore node-$(checksum pnpm-lock.yaml)
           - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
       jobs:
-        - name: yarn semantic-release
+        - name: pnpm semantic-release
           commands:
-            - yarn semantic-release
+            - pnpm semantic-release
