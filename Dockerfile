@@ -1,4 +1,4 @@
-FROM makeomatic/node:$NODE_VERSION-onbuild
+FROM makeomatic/node:$NODE_VERSION
 
 ENV NCONF_NAMESPACE=MS_PHONE \
     NODE_ENV=$NODE_ENV
