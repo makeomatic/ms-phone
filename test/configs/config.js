@@ -4,7 +4,9 @@ module.exports = {
     transport: {
       connection: {
         host: 'rabbitmq',
+        port: 5672,
       },
+      debug: true,
     },
   },
   phone: {

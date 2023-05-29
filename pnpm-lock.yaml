@@ -58,9 +58,6 @@ dependencies:
   is:
     specifier: ^3.1.0
     version: 3.1.0
-  jaeger-client:
-    specifier: ^3.13.0
-    version: 3.13.0
   lodash.merge:
     specifier: ^4.6.1
     version: 4.6.1
@@ -5335,17 +5332,6 @@ packages:
     optionalDependencies:
       '@pkgjs/parseargs': 0.11.0
 
-  /jaeger-client@3.13.0:
-    resolution: {integrity: sha512-ykrXLxcmSHSdDXqK6/DY+IObekfj4kbONC3QPu/ln7sbY5bsA+Yu4LYVlW9/vLm0lxLlsz52mSyC+sjiqM8xCw==}
-    engines: {node: '>=0.10'}
-    dependencies:
-      node-int64: 0.4.0
-      opentracing: 0.13.0
-      thriftrw: 3.12.0
-      uuid: 3.4.0
-      xorshift: 0.2.1
-    dev: false
-
   /jaeger-client@3.19.0:
     resolution: {integrity: sha512-M0c7cKHmdyEUtjemnJyx/y9uX16XHocL46yQvyqDlPdvAcwPDbHrIbKjQdBqtiE4apQ/9dmr+ZLJYYPGnurgpw==}
     engines: {node: '>=10'}
@@ -6379,10 +6365,6 @@ packages:
     dependencies:
       mimic-fn: 4.0.0
     dev: true
-
-  /opentracing@0.13.0:
-    resolution: {integrity: sha512-3eNqIeHoF8s4EJQFJaAAPE5DStLvQyBlO9K3slIt+HjRGOaGJr5FOBbwiq4ScLW/AzUdUfDZrf0fn2/UhO7i9A==}
-    dev: false
 
   /opentracing@0.14.7:
     resolution: {integrity: sha512-vz9iS7MJ5+Bp1URw8Khvdyw1H/hGvzHWlKQ7eRrQojSCDL1/SrWfrY9QebLw97n2deyRtzHRC3MkQfVNUCo91Q==}
@@ -8106,6 +8088,7 @@ packages:
     resolution: {integrity: sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==}
     deprecated: Please upgrade  to version 7 or higher.  Older versions may use Math.random() in certain circumstances, which is known to be problematic.  See https://v8.dev/blog/math-random for details.
     hasBin: true
+    dev: true
 
   /uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
@@ -8400,10 +8383,6 @@ packages:
   /xmlbuilder@13.0.2:
     resolution: {integrity: sha512-Eux0i2QdDYKbdbA6AM6xE4m6ZTZr4G4xF9kahI2ukSEMCzwce2eX9WlTI5J3s+NU7hpasFsr8hWIONae7LluAQ==}
     engines: {node: '>=6.0'}
-    dev: false
-
-  /xorshift@0.2.1:
-    resolution: {integrity: sha512-P7vgjXF9fGNdj97iI5v9nMnh1RpUROBlbfITf5CTAhaz96h/vKI/Lo5nikVqE0pBvraYNjdPIyOfHmECh7Mxxg==}
     dev: false
 
   /xorshift@1.2.0:

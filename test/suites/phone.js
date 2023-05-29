@@ -7,8 +7,12 @@ describe('Phone service', function serviceSuite() {
 
   const phoneService = new PhoneService(config);
 
-  before('start up service', () => phoneService.connect());
-  after('close service', () => phoneService.close());
+  before('start up service', async () => {
+    await phoneService.connect();
+  });
+  after('close service', async () => {
+    await phoneService.close();
+  });
 
   describe('with "twilio" provider', function twilioSuite() {
     describe('"message.predefined" action', function predefinedSuite() {
