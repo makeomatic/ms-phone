@@ -4,7 +4,9 @@ exports.plugins = [
   'validator',
   'logger',
   'router',
-  'http',
+  'hapi',
   'amqp',
+  'router-amqp',
+  'router-hapi',
   'prometheus',
 ];

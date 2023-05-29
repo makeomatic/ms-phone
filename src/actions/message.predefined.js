@@ -1,4 +1,4 @@
-const { ActionTransport } = require('@microfleet/core');
+const { ActionTransport } = require('@microfleet/plugin-router');
 
 /**
  * @api {amqp} <prefix>.message.predefined Send a message using predefined account

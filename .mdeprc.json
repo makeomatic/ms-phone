@@ -1,0 +1,21 @@
+{
+  "node": "19",
+  "auto_compose": true,
+  "nycCoverage": false,
+  "nycReport": false,
+  "test_framework": "c8 ./node_modules/.bin/mocha",
+  "services": [
+    "rabbitmq"
+  ],
+  "extras": {
+    "tester": {
+      "env_file": [
+        "${PWD}/test/.env"
+      ],
+      "environment": {
+        "NCONF_FILE_PATH": "[\"/src/test/configs/config.js\"]",
+        "NODE_ENV": "test"
+      }
+    }
+  }
+}

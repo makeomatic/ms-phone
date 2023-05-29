@@ -1,7 +1,14 @@
 {
   "extends": "makeomatic",
-  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
   "rules": {
     "object-curly-newline": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": true
+    }
   }
 }

@@ -9,5 +9,10 @@ exports.phone = {
     //   transportOptions: {},
     //   type: 'twilio',
     // },
+    // messagebird: {
+    //   apiKey: '<API_KEY>',
+    //   from: '+1 555 555 555',
+    //   type: 'messagebird',
+    // },
   },
 };

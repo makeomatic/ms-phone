@@ -1,15 +1,12 @@
 const merge = require('lodash.merge');
-const Errors = require('common-errors');
-const is = require('is');
 const { Microfleet } = require('@microfleet/core');
-const conf = require('./config');
+const { HttpStatusError } = require('@microfleet/validation');
+const getStore = require('./config');
 const transportFactory = require('./transports/factory');
 
 class Phone extends Microfleet {
-  static defaultConfig = conf.get('/', { env: process.env.NODE_ENV });
-
   constructor(config = {}) {
-    super(merge({}, Phone.defaultConfig, config));
+    super(config);
     this.initAccounts();
   }
 
@@ -30,8 +27,8 @@ class Phone extends Microfleet {
   getAccount(name) {
     const account = this._accounts[name];
 
-    if (is.undefined(account) === true) {
-      throw new Errors.NotFoundError(`Account ${name}`);
+    if (!account) {
+      throw new HttpStatusError(404, `Account ${name} not found`);
     }
 
     return account;
@@ -40,13 +37,20 @@ class Phone extends Microfleet {
   async getHealthStatus() {
     try {
       const status = await super.getHealthStatus();
-      this.log.info(status);
+      this.log.debug({ status }, 'health');
       return status;
     } catch (err) {
-      this.log.error(err);
+      this.log.error({ err }, 'failed healthcheck');
       throw err;
     }
   }
 }
 
-module.exports = Phone;
+exports.init = async function initPhone(defaultOpts = {}) {
+  const store = await getStore({ env: process.env.NODE_ENV });
+  const config = store.get('/');
+
+  return new Phone(merge({}, config, defaultOpts));
+};
+
+exports.Phone = Phone;

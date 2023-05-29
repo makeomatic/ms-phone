@@ -1,3 +1,6 @@
+/**
+ * @type { import('@microfleet/plugin-amqp').AMQPPluginConfig }
+ */
 exports.amqp = {
   transport: {
     connection: {
@@ -5,7 +8,8 @@ exports.amqp = {
       port: 5672,
     },
   },
-  router: {
-    enabled: true,
-  },
+};
+
+exports.routerAmqp = {
+
 };

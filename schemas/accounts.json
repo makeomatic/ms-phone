@@ -2,5 +2,8 @@
   "$id": "accounts",
   "oneOf": [{
     "$ref": "account-twilio"
+  },
+  {
+    "$ref": "account-messagebird"
   }]
 }
