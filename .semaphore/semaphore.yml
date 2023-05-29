@@ -37,8 +37,8 @@ blocks:
         - name: ms-phone
   - name: Release
     dependencies: ["Install dependencies & test"]
-    run:
-      when: (branch = 'master' OR branch = 'staging') AND result = 'passed'
+    skip:
+      when: branch != 'master' OR branch != 'staging'
     task:
       secrets:
       - name: docker-hub
