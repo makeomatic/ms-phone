@@ -1,15 +1,14 @@
 const assert = require('assert');
-const { inspectPromise } = require('@makeomatic/deploy');
+const preparePhoneService = require('../../src');
 
 describe('Phone service', function serviceSuite() {
-  const config = require('../configs/config');
-  const PhoneService = require('../../src');
+  let phoneService;
 
-  const phoneService = new PhoneService(config);
-
-  before('start up service', async () => {
+  it('start up service', async () => {
+    phoneService = await preparePhoneService();
     await phoneService.connect();
   });
+
   after('close service', async () => {
     await phoneService.close();
   });
@@ -24,12 +23,10 @@ describe('Phone service', function serviceSuite() {
           to: '+79219234781',
         };
 
-        const error = await amqp
-          .publishAndWait('phone.message.predefined', message)
-          .reflect()
-          .then(inspectPromise(false));
-
-        assert.deepStrictEqual(error.message, 'Not Found: "Account invalid_account"');
+        await assert.rejects(
+          amqp.publishAndWait('phone.message.predefined', message),
+          'Not Found: "Account invalid_account"'
+        );
       });
 
       it('should be able to send message', async () => {
@@ -62,14 +59,13 @@ describe('Phone service', function serviceSuite() {
           to: '+79219234781',
         };
 
-        const error = await amqp.publishAndWait('phone.message.adhoc', message)
-          .reflect()
-          .then(inspectPromise(false));
-
-        assert.deepStrictEqual(error.message, 'message-adhoc validation'
+        await assert.rejects(
+          amqp.publishAndWait('phone.message.adhoc', message),
+          'message-adhoc validation'
             + ' failed: data.account should have required property \'authToken\','
             + ' data.account.type should be equal to constant, data.account should match'
-            + ' exactly one schema in oneOf');
+            + ' exactly one schema in oneOf'
+        );
       });
 
       it('should be able to send message - sandbox', async () => {
@@ -77,7 +73,7 @@ describe('Phone service', function serviceSuite() {
         const message = {
           account: {
             authToken: process.env.TEST_AUTH_TOKEN,
-            from: process.env.TEST_PHONE_NUMBER,
+            from: process.env.TEST_PHONE_NUMBER_TWILIO,
             sid: process.env.TEST_ACCOUNT_SID,
             type: 'twilio',
           },
@@ -113,7 +109,7 @@ describe('Phone service', function serviceSuite() {
       const message = {
         account: {
           apiKey: process.env.TEST_API_KEY_MESSAGE_BIRD,
-          from: process.env.TEST_PHONE_NUMBER,
+          from: process.env.TEST_PHONE_NUMBER_MESSAGEBIRD,
           type: 'messagebird',
         },
         message: 'adhoc test message',

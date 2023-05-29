@@ -13,8 +13,7 @@
       "type": "string"
     },
     "transportOptions": {
-      "type": "object",
-      "default": {}
+      "type": "object"
     },
     "type": {
       "type": "string",

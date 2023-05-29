@@ -1,10 +1,9 @@
-exports.http = {
+exports.hapi = {
   server: {
-    handler: 'hapi',
     port: 3000,
   },
-  router: {
-    prefix: '',
-    enabled: true,
-  },
+};
+
+exports.routerHapi = {
+  prefix: '',
 };

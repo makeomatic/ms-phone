@@ -1,12 +1,11 @@
-const Errors = require('common-errors');
-const is = require('is');
+const { HttpStatusError } = require('@microfleet/validation');
 const adapters = require('./adapters');
 
 module.exports = (accountConfig) => {
   const adapter = adapters[accountConfig.type];
 
-  if (is.undefined(adapter) === true) {
-    throw new Errors.NotImplementedError(`Transport ${accountConfig.type}`);
+  if (!adapter) {
+    throw new HttpStatusError(500, `Transport ${accountConfig.type} unimplemented`);
   }
 
   return adapter(accountConfig);

@@ -2,19 +2,18 @@
   "name": "ms-phone",
   "description": "",
   "version": "2.5.0",
-  "main": "./lib/index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "compile": "rimraf ./lib; cp -r ./src ./lib",
     "docker-release": "mdep docker release",
     "lint": "eslint ./src ./test",
     "prepublishOnly": "npm run compile",
     "semantic-release": "semantic-release",
     "start": "mfleet",
-    "test": "pnpm lint && mdep test run"
+    "test": "pnpm lint && mdep test run",
+    "prepack": "mdep install || true"
   },
   "files": [
     "src/",
-    "lib/",
     "schemas/"
   ],
   "dependencies": {
@@ -34,16 +33,14 @@
     "@microfleet/transport-amqp": "^17.4.0",
     "@microfleet/validation": "^11.1.3",
     "@sentry/node": "^7.53.1",
-    "chalk": "^5.2.0",
-    "common-errors": "^1.0.0",
+    "common-errors": "^1.2.0",
     "glob": "^10.2.6",
-    "is": "^3.1.0",
-    "lodash.merge": "^4.6.1",
+    "is": "^3.3.0",
+    "lodash.merge": "^4.6.2",
     "messagebird": "^4.0.1",
     "ms-conf": "^8.1.2",
     "pino": "^8.14.1",
     "prom-client": "^14.2.0",
-    "raven": "^2.6.4",
     "twilio": "^4.11.1"
   },
   "devDependencies": {
@@ -52,11 +49,11 @@
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@semantic-release/github": "^8.0.7",
+    "@semantic-release/github": "^8.1.0",
     "apidoc": "^1.0.2",
     "apidoc-plugin-schema": "0.1.8",
-    "codecov": "^3.1.0",
-    "cross-env": "^7.0.0",
+    "c8": "^7.14.0",
+    "cross-env": "^7.0.3",
     "eslint": "^8.41.0",
     "eslint-config-makeomatic": "^5.1.0",
     "eslint-plugin-import": "^2.27.5",
@@ -69,18 +66,12 @@
     "sinon": "^15.1.0"
   },
   "engine": {
-    "node": ">= 14.18.0",
+    "node": ">= 18.16.0",
     "npm": ">= 6.0.0"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/makeomatic/ms-phone.git"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -e $HUSKY_GIT_PARAMS",
-      "prepare-commit-msg": "./node_modules/@makeomatic/deploy/git-hooks/prepare-commit-msg $HUSKY_GIT_PARAMS"
-    }
   }
 }

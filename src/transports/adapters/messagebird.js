@@ -6,7 +6,6 @@ module.exports = (accountConfig) => {
   const client = initClient(apiKey);
   const recipients = [];
 
-  // eslint-disable-next-line promise/no-native
   const send = (to, body) => new Promise((resolve, reject) => {
     recipients.push(to);
     const msgParams = { originator: from, recipients, body };

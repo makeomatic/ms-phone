@@ -1,4 +1,4 @@
-const { resolve } = require('node:path');
+const { resolve } = require('path');
 const { Store } = require('ms-conf');
 
 // default to "MS_MAILER"

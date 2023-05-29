@@ -1,6 +1,14 @@
 {
   "extends": "makeomatic",
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
   "rules": {
     "object-curly-newline": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "node": true
+    }
   }
 }

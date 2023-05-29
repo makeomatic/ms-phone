@@ -1,22 +1,16 @@
-const { ActionTransport, routerExtension } = require('@microfleet/core');
+const { Extensions } = require('@microfleet/plugin-router');
 const path = require('path');
 
+/**
+ * @type { import('@microfleet/plugin-router').RouterPluginConfig }
+ */
 exports.router = {
   routes: {
     directory: path.join(__dirname, '../actions'),
     prefix: 'phone',
-    setTransportsAsDefault: false,
-    transports: [ActionTransport.amqp, ActionTransport.http],
-    enabledGenericActions: [
-      'health',
-    ],
+    enabledGenericActions: ['health'],
   },
   extensions: {
-    enabled: ['postRequest', 'preRequest', 'preResponse', 'postResponse'],
-    register: [
-      routerExtension('validate/schemaLessAction'),
-      routerExtension('audit/log')(),
-      routerExtension('audit/metrics')(),
-    ],
+    register: [Extensions.auditLog()],
   },
 };
