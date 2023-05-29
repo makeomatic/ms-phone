@@ -1,6 +1,8 @@
 {
-  "node": "18",
+  "node": "19",
   "auto_compose": true,
+  "nycCoverage": false,
+  "nycReport": false,
   "services": [
     "rabbitmq"
   ],
