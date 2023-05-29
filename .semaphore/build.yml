@@ -17,7 +17,7 @@ blocks:
           - 'echo ''{"experimental":true}'' > /etc/docker/daemon.json'
           - sudo service docker restart
           - sem-version node 16
-          - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
+          - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@8
           - checkout
           - cache restore node-$(checksum pnpm-lock.yaml)
           - echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin

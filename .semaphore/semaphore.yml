@@ -12,7 +12,7 @@ blocks:
           - set -e
           - sem-version node 16
           - checkout
-          - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
+          - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@8
           - cache restore node-$(checksum pnpm-lock.yaml)
           - cp ../test/.env test/.env
           - pnpm i --frozen-lockfile --prefer-offline --ignore-scripts
