@@ -1,16 +1,13 @@
 function isBlacklisted(phone, blackList = []) {
-  let blackListed = false;
-
-  if (blackList.length === 0) return blackListed;
+  if (blackList.length === 0) return false;
 
   for (const pattern of blackList) {
     if (phone.startsWith(pattern)) {
-      blackListed = true;
-      break;
+      return true;
     }
   }
 
-  return blackListed;
+  return false;
 }
 
 module.exports = isBlacklisted;
