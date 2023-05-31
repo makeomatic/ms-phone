@@ -1,12 +1,11 @@
 {
   "name": "ms-phone",
   "description": "",
-  "version": "2.5.0",
+  "version": "3.0.1",
   "main": "./src/index.js",
   "scripts": {
     "docker-release": "mdep docker release",
     "lint": "eslint ./src ./test",
-    "prepublishOnly": "npm run compile",
     "semantic-release": "semantic-release",
     "start": "mfleet",
     "test": "pnpm lint && mdep test run",
