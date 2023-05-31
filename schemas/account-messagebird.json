@@ -12,6 +12,9 @@
     "type": {
       "type": "string",
       "const": "messagebird"
+    },
+    "blackList": {
+      "type": "array"
     }
   }
 }

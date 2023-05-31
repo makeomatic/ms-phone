@@ -23,6 +23,7 @@ module.exports = {
         apiKey: process.env.TEST_API_KEY_MESSAGE_BIRD,
         from: process.env.TEST_PHONE_NUMBER_MESSAGEBIRD,
         type: 'messagebird',
+        blackList: ['+7'],
       },
     },
   },
