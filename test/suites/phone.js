@@ -1,12 +1,16 @@
 const assert = require('assert');
+const sinon = require('sinon');
 const preparePhoneService = require('../../src');
 
 describe('Phone service', function serviceSuite() {
   let phoneService;
+  let messagebirdAccount;
 
-  it('start up service', async () => {
+  before('start up service', async () => {
     phoneService = await preparePhoneService();
     await phoneService.connect();
+
+    messagebirdAccount = phoneService.getAccount('test_account_messagebird');
   });
 
   after('close service', async () => {
@@ -90,18 +94,37 @@ describe('Phone service', function serviceSuite() {
   });
 
   describe('with "messagebird" provider', function messagebirdSuite() {
+    let sandbox;
+    let messagebirdMessageClient;
+
+    before(() => {
+      sandbox = sinon.createSandbox();
+      messagebirdMessageClient = messagebirdAccount.transport.client.messages;
+      sandbox.spy(messagebirdMessageClient, 'create');
+    });
+
+    afterEach(() => {
+      sandbox.resetHistory();
+    });
+
     it('should be able to send message on "message.predefined" action', async () => {
       const { amqp } = phoneService;
       const message = {
         account: 'test_account_messagebird',
         message: 'predefined test message',
-        to: '+79219234781',
+        to: '+19219234781',
       };
 
       const response = await amqp.publishAndWait('phone.message.predefined', message);
 
+      sandbox.assert.calledOnce(messagebirdMessageClient.create);
+
+      const [{ recipients }] = messagebirdMessageClient.create.getCall(0).args;
+      assert.equal(message.to, recipients);
+
       assert(response.id);
       assert.equal(response.totalSentCount, 1);
+      assert.equal(response.blackListed, false);
     });
 
     it('should be able to send message on "message.adhoc" action', async () => {
@@ -113,13 +136,30 @@ describe('Phone service', function serviceSuite() {
           type: 'messagebird',
         },
         message: 'adhoc test message',
-        to: '+79219234781',
+        to: '+19219234781',
       };
 
       const response = await amqp.publishAndWait('phone.message.adhoc', message);
 
       assert(response.id);
       assert.equal(response.totalSentCount, 1);
+      assert.equal(response.blackListed, false);
+    });
+
+    it('should not send message to blacklisted phones', async () => {
+      const { amqp } = phoneService;
+      const message = {
+        account: 'test_account_messagebird',
+        message: 'predefined test message',
+        to: '+79219234781',
+      };
+
+      const response = await amqp.publishAndWait('phone.message.predefined', message);
+
+      sandbox.assert.notCalled(messagebirdMessageClient.create);
+
+      assert.equal(response.totalSentCount, 0);
+      assert.equal(response.blackListed, true);
     });
   });
 });

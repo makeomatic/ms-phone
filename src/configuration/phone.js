@@ -13,6 +13,7 @@ exports.phone = {
     //   apiKey: '<API_KEY>',
     //   from: '+1 555 555 555',
     //   type: 'messagebird',
+    //   blackList: ['+7', '+22'], // all phones started from (+7 OR +22) are blacklisted
     // },
   },
 };

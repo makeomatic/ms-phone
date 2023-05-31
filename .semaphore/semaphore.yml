@@ -16,23 +16,23 @@ auto_cancel:
 global_job_config:
   prologue:
     commands:
-    - checkout
-    - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@8
-    - cache restore node-$(checksum pnpm-lock.yaml)
-    - pnpm config set store-dir ~/.pnpm-store
-    - pnpm i --frozen-lockfile --prefer-offline --ignore-scripts
-    - cache store node-$(checksum pnpm-lock.yaml) ~/.pnpm-store
+      - checkout
+      - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@8
+      - cache restore node-$(checksum pnpm-lock.yaml)
+      - pnpm config set store-dir ~/.pnpm-store
+      - pnpm i --frozen-lockfile --prefer-offline --ignore-scripts
+      - cache store node-$(checksum pnpm-lock.yaml) ~/.pnpm-store
 
 blocks:
   - name: Install dependencies & test
     dependencies: []
     task:
       jobs:
-      - name: tests
-        commands:
-          - cp ~/.test.env test/.env
-          - pnpm test
-          - pnpm mdep docker build
+        - name: tests
+          commands:
+            - cp ~/.test.env test/.env
+            - pnpm test
+            - pnpm mdep docker build
       secrets:
         - name: ms-phone
   - name: Release
@@ -41,10 +41,10 @@ blocks:
       when: branch != 'master' AND branch != 'staging'
     task:
       secrets:
-      - name: docker-token
-      - name: semantic-release
+        - name: docker-token
+        - name: semantic-release
       jobs:
-      - name: release
-        commands:
-          - echo $DOCKER_ACCESS_TOKEN | docker login --username $DOCKER_USERNAME --password-stdin
-          - pnpm run semantic-release
+        - name: release
+          commands:
+            - echo $DOCKER_ACCESS_TOKEN | docker login --username $DOCKER_USERNAME --password-stdin
+            - pnpm run semantic-release
