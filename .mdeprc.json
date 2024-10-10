@@ -1,8 +1,6 @@
 {
-  "node": "19",
+  "node": "20",
   "auto_compose": true,
-  "nycCoverage": false,
-  "nycReport": false,
   "test_framework": "c8 ./node_modules/.bin/mocha",
   "services": [
     "rabbitmq"

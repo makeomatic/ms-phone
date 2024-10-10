@@ -17,7 +17,8 @@ global_job_config:
   prologue:
     commands:
       - checkout
-      - curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@8
+      - sem-version node 20
+      - npm i -g pnpm@8
       - cache restore node-$(checksum pnpm-lock.yaml)
       - pnpm config set store-dir ~/.pnpm-store
       - pnpm i --frozen-lockfile --prefer-offline --ignore-scripts
