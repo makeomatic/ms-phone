@@ -1,5 +1,7 @@
 const assert = require('assert');
 const sinon = require('sinon');
+const { MockAgent, setGlobalDispatcher } = require('undici');
+
 const preparePhoneService = require('../../src');
 
 describe('Phone service', function serviceSuite() {
@@ -66,9 +68,9 @@ describe('Phone service', function serviceSuite() {
         await assert.rejects(
           amqp.publishAndWait('phone.message.adhoc', message),
           'message-adhoc validation'
-            + ' failed: data.account should have required property \'authToken\','
-            + ' data.account.type should be equal to constant, data.account should match'
-            + ' exactly one schema in oneOf'
+          + ' failed: data.account should have required property \'authToken\','
+          + ' data.account.type should be equal to constant, data.account should match'
+          + ' exactly one schema in oneOf'
         );
       });
 
@@ -160,6 +162,104 @@ describe('Phone service', function serviceSuite() {
 
       assert.equal(response.totalSentCount, 0);
       assert.equal(response.blackListed, true);
+    });
+  });
+
+  describe('with "i-dgtl" provider', () => {
+    const mockAgent = new MockAgent();
+    setGlobalDispatcher(mockAgent);
+    const mockPool = mockAgent.get('https://direct.i-dgtl.ru');
+
+    it('should be able to send message on "message.predefined" action', async () => {
+      mockPool
+        .intercept({
+          path: '/api/v1/message',
+          method: 'POST',
+          headers: {
+            authorization: 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify([{
+            senderName: 'sms_promo',
+            channelType: 'SMS',
+            content: 'predefined test message',
+            destination: '+15551234567',
+          }]),
+        })
+        .reply(200, {
+          errors: false,
+          items: [{
+            code: 201,
+            messageUuid: '063474ec-a34f-4558-90c5-984395000004',
+          }],
+        });
+
+      const { amqp } = phoneService;
+      const message = {
+        account: 'test_account_iDgtl',
+        message: 'predefined test message',
+        to: '+15551234567',
+      };
+
+      const response = await amqp.publishAndWait('phone.message.predefined', message);
+
+      assert.deepStrictEqual(response, {
+        errors: false,
+        items: [{
+          code: 201,
+          messageUuid: '063474ec-a34f-4558-90c5-984395000004',
+        }],
+      });
+    });
+
+    it('should be able to send message on "message.adhoc" action', async () => {
+      mockPool
+        .intercept({
+          path: '/api/v1/message',
+          method: 'POST',
+          headers: {
+            authorization: 'Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
+            'content-type': 'application/json',
+          },
+          body: JSON.stringify([{
+            externalMessageId: 'id123',
+            senderName: 'sms_cat',
+            channelType: 'SMS',
+            content: 'adhoc test message',
+            destination: '+15551234567',
+          }]),
+        })
+        .reply(200, {
+          errors: false,
+          items: [{
+            code: 201,
+            externalMessageId: 'id123',
+            messageUuid: '063474ec-a34f-4558-90c5-984395000004',
+          }],
+        });
+
+      const { amqp } = phoneService;
+      const message = {
+        account: {
+          apiKey: 'QWxhZGRpbjpvcGVuIHNlc2FtZQ==',
+          externalMessageId: 'id123',
+          senderName: 'sms_cat',
+          type: 'i-dgtl',
+        },
+        message: 'adhoc test message',
+        to: '+15551234567',
+      };
+
+      const response = await amqp.publishAndWait('phone.message.adhoc', message);
+
+      assert.deepStrictEqual(response, {
+        errors: false,
+        items: [{
+          code: 201,
+          externalMessageId: 'id123',
+          messageUuid: '063474ec-a34f-4558-90c5-984395000004',
+        }],
+      });
     });
   });
 });

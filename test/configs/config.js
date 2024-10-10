@@ -25,6 +25,11 @@ module.exports = {
         type: 'messagebird',
         blackList: ['+7'],
       },
+      test_account_iDgtl: {
+        apiKey: 'QWxhZGRpbjpvcGVuIHNlc2FtZQ==', // not real api key
+        senderName: 'sms_promo',
+        type: 'i-dgtl',
+      },
     },
   },
 };

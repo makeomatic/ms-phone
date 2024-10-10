@@ -1,0 +1,92 @@
+{
+  "$id": "account-i-dgtl",
+  "type": "object",
+  "required": [
+    "type",
+    "apiKey",
+    "senderName"
+  ],
+  "properties": {
+    "type": {
+      "const": "i-dgtl",
+      "description": "Provider type (i-dgtl)",
+      "type": "string"
+    },
+    "apiKey": {
+      "description": "Traffic token",
+      "type": "string"
+    },
+    "senderName": {
+      "description": "Sender's name. SMS names in the status “Approved” with the validity date not later than the time of sending the request are allowed",
+      "type": "string"
+    },
+    "tags": {
+      "description": "Message tags (array of strings). Each tag must match the expression `^\\w+$` (letters in any case, digits and underscore \"_\" are allowed).",
+      "items": {
+        "type": "string",
+        "pattern": "^\\w+$"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "useLocalTime": {
+      "description": "Flag responsible for the time zone in which the message will be sent: `true` - send in the subscriber's time zone; `false` - send according to MSK. Default is true",
+      "type": "boolean"
+    },
+    "localSendTime": {
+      "description": "Lower boundary of the allowable time of message sending (taking into account the `useLocalTime` value). Date in the format '`YYYYY-MM-DD hh:mm:ss`' in the range from (current time in UTC - 12 hours) to (current time in UTC + 7 days). By default, the message will be sent immediately",
+      "type": "string"
+    },
+    "localCompletionTime": {
+      "description": "Upper limit of allowable message sending time (taking into account `useLocalTime`) in the range from `localSendTime` to (current time in UTC + 70 days)",
+      "type": "string"
+    },
+    "ttl": {
+      "description": "The lifetime of the message in seconds. After ttl expires, the message is set to final status. `60 ≤ ttl ≤ 86400`",
+      "maximum": 86400,
+      "minimum": 60,
+      "type": "integer"
+    },
+    "hours": {
+      "description": "Allowed sending hours (array of numbers). The array can contain integers from 0 to 23, each of which corresponds to an allowed sending hour interval, taking into account `useLocalTime`; the values must be unique",
+      "items": {
+        "maximum": 23,
+        "minimum": 0,
+        "type": "integer"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "days": {
+      "description": "Allowed sending days (array of numbers). The array can contain integers from 1 (Mon) to 7 (Fri), each of which corresponds to a day of the week allowed for sending; values must be unique",
+      "items": {
+        "maximum": 7,
+        "minimum": 1,
+        "type": "integer"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "shortUrl": {
+      "description": "Flag responsible for shortening links in the message: `true` - links in the message text will be shortened. Default is `false`",
+      "type": "boolean"
+    },
+    "callbackUrl": {
+      "description": "Address to send callback",
+      "type": "string"
+    },
+    "callbackEvents": {
+      "description": "Events on which callbacks will be sent (array of strings). If `callbackUrl` is present and there are no `callbackEvents` in the request, a callback will be sent on the `delivered` event",
+      "items": {
+        "type": "string"
+      },
+      "type": "array",
+      "uniqueItems": true
+    },
+    "externalMessageId": {
+      "description": "Internal id of the message in your system. Up to 100 characters",
+      "maxLength": 100,
+      "type": "string"
+    }
+  }
+}
