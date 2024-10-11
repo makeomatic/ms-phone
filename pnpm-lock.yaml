@@ -80,6 +80,9 @@ dependencies:
   twilio:
     specifier: ^5.3.3
     version: 5.3.3
+  undici:
+    specifier: ^6.20.0
+    version: 6.20.0
 
 devDependencies:
   '@makeomatic/deploy':
@@ -8321,7 +8324,6 @@ packages:
   /undici@6.20.0:
     resolution: {integrity: sha512-AITZfPuxubm31Sx0vr8bteSalEbs9wQb/BOBi9FPlD9Qpd6HxZ4Q0+hI742jBhkPb4RT2v5MQzaW5VhRVyj+9A==}
     engines: {node: '>=18.17'}
-    dev: true
 
   /unicode-emoji-modifier-base@1.0.0:
     resolution: {integrity: sha512-yLSH4py7oFH3oG/9K+XWrz1pSi3dfUrWEnInbxMfArOfc1+33BlGPQtLsOYwvdMy11AwUBetYuaRxSPqgkq+8g==}
