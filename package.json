@@ -1,7 +1,7 @@
 {
   "name": "ms-phone",
   "description": "",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "main": "./src/index.js",
   "scripts": {
     "docker-release": "mdep docker release",
