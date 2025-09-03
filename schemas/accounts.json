@@ -1,9 +1,14 @@
 {
   "$id": "accounts",
-  "oneOf": [{
-    "$ref": "account-twilio"
-  },
-  {
-    "$ref": "account-messagebird"
-  }]
+  "oneOf": [
+    {
+      "$ref": "account-twilio"
+    },
+    {
+      "$ref": "account-messagebird"
+    },
+    {
+      "$ref": "account-i-dgtl"
+    }
+  ]
 }
