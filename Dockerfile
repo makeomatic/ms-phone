@@ -1,28 +1,4 @@
-# Use this when makeomatic/node is fixed
-# FROM makeomatic/node:$NODE_VERSION
-
-# fix start
-# https://github.com/makeomatic/alpine-node/blob/master/node/Dockerfile
-FROM node:$NODE_VERSION-alpine
-
-ENV COREPACK_DEFAULT_TO_LATEST=0 \
-    COREPACK_ENABLE_DOWNLOAD_PROMPT=0 \
-    COREPACK_ENABLE_NETWORK=0 \
-    COREPACK_ENABLE_AUTO_PIN=0 \
-    COREPACK_ENABLE_PROJECT_SPEC=0 \
-    COREPACK_HOME=/usr/local/src/corepack
-
-RUN \
-    mkdir -p $COREPACK_HOME \
-    && chown root:node $COREPACK_HOME \
-    && corepack enable \
-    && COREPACK_ENABLE_NETWORK=1 corepack install --global pnpm@9.x \
-    && su node -c 'pnpm config set global-bin-dir "/usr/local/bin"' \
-    && su node -c 'rm -rf ~/.cache ~/.npm' \
-    && rm -rf ~/.npm \
-    && chown -R root:node /usr/local/bin \
-    && chmod g+w /usr/local/bin
-# fix end
+FROM makeomatic/node:$NODE_VERSION
 
 ENV NCONF_NAMESPACE=MS_PHONE \
     NODE_ENV=$NODE_ENV

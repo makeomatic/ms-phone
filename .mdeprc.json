@@ -1,5 +1,5 @@
 {
-  "node": "20",
+  "node": "22",
   "auto_compose": true,
   "test_framework": "c8 ./node_modules/.bin/mocha",
   "services": [
